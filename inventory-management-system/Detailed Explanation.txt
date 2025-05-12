@@ -1,0 +1,51 @@
+📘 INVENTORY SYSTEM BLUEPRINT
+=============================
+
+📁 inventory.py
+----------------
+- Contains the Inventory class that manages all products.
+- Functions:
+  - add_product(product): Adds a new product to inventory.
+  - remove_product(product_id): Removes a product.
+  - search_by_name(name): Finds product(s) by name.
+  - search_by_type(type): Finds product(s) by type (Electronics, Clothing, etc).
+  - list_all_products(): Returns a list of all products.
+  - sell_product(product_id, quantity): Sells quantity of product; decreases stock.
+  - restock_product(product_id, quantity): Increases stock of a product.
+  - total_inventory_value(): Calculates total value of all inventory.
+  - remove_expired_products(): Removes expired Grocery items.
+  - save_to_file(filename): Saves inventory to a JSON file.
+  - load_from_file(filename): Loads inventory from a JSON file.
+
+📁 product.py
+----------------
+- Base class: Product (abstract)
+  - Attributes: _product_id, _name, _price, _quantity_in_stock
+  - Methods: restock, sell, get_total_value, to_dict
+
+- Subclasses:
+  - Electronics:
+      - Extra: warranty_years, brand
+  - Grocery:
+      - Extra: expiry_date, has method is_expired()
+  - Clothing:
+      - Extra: size, material
+
+📁 utils.py
+-------------
+- Contains custom exceptions:
+  - DuplicateProductIDError
+  - InsufficientStockError
+  - InvalidProductDataError
+
+- Utility function:
+  - parse_date(date_str): Converts 'YYYY-MM-DD' string to date object
+
+📌 RELATIONSHIPS
+-----------------
+- Inventory uses Product and its subclasses.
+- Inventory uses utils.py for error handling and date parsing.
+- Product is an abstract base class extended by:
+    - Electronics
+    - Grocery
+    - Clothing
